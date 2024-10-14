@@ -1,5 +1,5 @@
 module.exports.config = {
-    name: 'teach',
+    name: 'Teach',
     version: '1.0.0',
     role: 0,
     description: "Teach the bot to respond like a person",

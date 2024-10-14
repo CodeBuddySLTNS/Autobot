@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "unsend",
+  name: "Unsend",
   version: "1.0.0",
   role: 0,
   hasPrefix: true,

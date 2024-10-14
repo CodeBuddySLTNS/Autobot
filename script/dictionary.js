@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "dictionary",
+  name: "Dictionary",
   version: "1.0.0",
   role: 0,
   hasPrefix: true,

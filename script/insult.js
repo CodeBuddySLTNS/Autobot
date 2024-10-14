@@ -1,6 +1,6 @@
 const axios = require('axios');
 module.exports.config = {
-  name: "insult",
+  name: "Insult",
   version: "1.0.0",
   role: 0,
   hasPrefix: true,

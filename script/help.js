@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: 'info',
+  name: 'Info',
   version: '1.0.0',
   role: 0,
   hasPrefix: true,
@@ -29,9 +29,9 @@ module.exports.run = async function({
       for (let i = start; i < Math.min(end, commands.length); i++) {
         helpMessage += `\t★ ${commands[i]}\n`;
       }
-      helpMessage += `\n━━━━━━━━━━━━━━━\n𝗙𝗼𝗹𝗹𝗼𝘄 𝘁𝗵𝗲 𝗱𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿: https://www.facebook.com/bosscleo3233
+      helpMessage += `━━━━━━━━━━━━━━━\n𝗙𝗼𝗹𝗹𝗼𝘄 𝘁𝗵𝗲 𝗱𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿: https://www.facebook.com/bosscleo3233
       
-      𝗖𝗼𝗱𝗲𝗕𝘂𝗱𝗱𝘆 𝗬𝗧: https://www.youtube.com/@CodeBuddySolutions\n━━━━━━━━━━━━━━━━\nPage ${page}/${Math.ceil(commands.length / pages)}. To view the next page, type '${prefix}info page number'. To view information about a specific command, type '${prefix}info command name'.`;
+      𝗖𝗼𝗱𝗲𝗕𝘂𝗱𝗱𝘆 𝗬𝗧: https://www.youtube.com/@CodeBuddySolutions\n━━━━━━━━━━━━━━━━\nPage ${page}/${Math.ceil(commands.length / pages)}. To view the next page, type '${prefix}info <page number>'. To view information about a specific command, type '${prefix}info <command name>'.`;
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else if (!isNaN(input)) {
       const pages = 20;
@@ -42,9 +42,9 @@ module.exports.run = async function({
       for (let i = start; i < Math.min(end, commands.length); i++) {
         helpMessage += `\t★ ${commands[i]}\n`;
       }
-      helpMessage += `\n━━━━━━━━━━━━━━━\n𝗙𝗼𝗹𝗹𝗼𝘄 𝘁𝗵𝗲 𝗱𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿: https://www.facebook.com/bosscleo3233
+      helpMessage += `━━━━━━━━━━━━━━━\n𝗙𝗼𝗹𝗹𝗼𝘄 𝘁𝗵𝗲 𝗱𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿: https://www.facebook.com/bosscleo3233
       
-      𝗖𝗼𝗱𝗲𝗕𝘂𝗱𝗱𝘆 𝗬𝗧: https://www.youtube.com/@CodeBuddySolutions\n━━━━━━━━━━━━━━━━\nPage ${page}/${Math.ceil(commands.length / pages)}. To view the next page, type '${prefix}info page number'. To view information about a specific command, type '${prefix}info command name'.`;
+      𝗖𝗼𝗱𝗲𝗕𝘂𝗱𝗱𝘆 𝗬𝗧: https://www.youtube.com/@CodeBuddySolutions\n━━━━━━━━━━━━━━━━\nPage ${page}/${Math.ceil(commands.length / pages)}. To view the next page, type '${prefix}info <page number>'. To view information about a specific command, type '${prefix}info <command name>'.`;
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else {
       const command = [...Utils.handleEvent, ...Utils.commands].find(([key]) => key.includes(input?.toLowerCase()))?.[1];
@@ -66,11 +66,9 @@ module.exports.run = async function({
         const creditsMessage = credits ? `➛ Credits: ${credits}\n` : '';
         const versionMessage = version ? `➛ Version: ${version}\n` : '';
         const cooldownMessage = cooldown ? `➛ Cooldown: ${cooldown} second(s)\n` : '';
-        const message = `𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗜𝗻𝗳𝗼𝗿𝗺𝗮𝘁𝗶𝗼𝗻👾\n━━━━━━━━━━━━━━━━\n𝙲𝚘𝚖𝚖𝚊𝚗𝚍 𝙽𝚊𝚖𝚎: ${name}\n${descriptionMessage}${usageMessage}\n━━━━━━━━━━━━━━━━`;
+        const message = `𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗜𝗻𝗳𝗼𝗿𝗺𝗮𝘁𝗶𝗼𝗻👾\n━━━━━━━━━━━━━━━━\n𝙲𝚘𝚖𝚖𝚊𝚗𝚍 𝙽𝚊𝚖𝚎: ${name}\n${descriptionMessage}\n${usageMessage} ━━━━━━━━━━━━━━━━`;
         api.sendMessage(message, event.threadID, event.messageID);
-      } else {
-        api.sendMessage('Command not found.', event.threadID, event.messageID);
-      }
+      } else {}
     }
   } catch (error) {
     console.log(error);

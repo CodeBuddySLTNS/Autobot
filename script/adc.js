@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "adc",
+  name: "Adc",
   version: "1.0.0",
   role: 3,
   hasPrefix: true,

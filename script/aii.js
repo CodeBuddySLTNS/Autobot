@@ -6,6 +6,7 @@ module.exports.config = {
   name: 'Aii',
   version: '1.0.0',
   role: 0,
+  aliases: ['aii'],
   hasPrefix: false,
   description: "An AI command with a simplified response.",
   usage: "Aii [prompt]",

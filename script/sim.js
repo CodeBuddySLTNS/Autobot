@@ -1,5 +1,5 @@
 module.exports.config = {
-    name: 'sim',
+    name: 'Sim',
     version: '1.0.0',
     role: 0,
     description: "Engage in conversation with an AI bot",
