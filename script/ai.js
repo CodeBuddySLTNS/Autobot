@@ -1,15 +1,16 @@
 const axios = require('axios');
-const apiUrls = require('../apiConfig.js')
+const config = require('../config.json');
 
 async function getAnswers(q, id){
   try {
-    for(url of apiUrls.joshuaApi){
+    for(url of config.codebuddyApi){
       const data = await fetchFromAi(q, url, id);
       if (data) return data;
     }
     
     throw new Error("No valid response from any AI service");
   } catch (e) {
+    console.log(e);
     throw e;
   }
 }
