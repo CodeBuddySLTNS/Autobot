@@ -3,9 +3,9 @@ module.exports.config = {
   version: "1.0.0",
   role: 0,
   hasPrefix: true,
-  aliases: ['search'],
+  aliases: ['dictionary', 'search'],
   description: "Search words dictionary",
-  usage: "Ai [promot]",
+  usage: "Ai [prompt]",
   credits: 'Develeoper',
   cooldown: 5,
 };

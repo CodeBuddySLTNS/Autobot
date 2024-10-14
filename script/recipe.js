@@ -4,6 +4,7 @@ module.exports.config = {
   version: "1.0.0",
   role: 0,
   hasPrefix: true,
+  aliases: ['recipe'],
   description: "Get a random recipe.",
   usage: "recipe",
   credits: "Developer",

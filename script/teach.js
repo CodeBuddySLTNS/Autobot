@@ -2,6 +2,7 @@ module.exports.config = {
     name: 'Teach',
     version: '1.0.0',
     role: 0,
+    aliases: ['teach'],
     description: "Teach the bot to respond like a person",
     usage: "teach [question] | [answer]",
     credits: 'Developer',

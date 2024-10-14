@@ -2,6 +2,7 @@ module.exports.config = {
     name: 'Sim',
     version: '1.0.0',
     role: 0,
+    aliases: ['sim'],
     description: "Engage in conversation with an AI bot",
     usage: "sim [prompt]",
     credits: 'Developer',

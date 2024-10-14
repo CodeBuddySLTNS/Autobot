@@ -4,7 +4,7 @@ module.exports.config = {
   version: "1.0.0",
   role: 0,
   hasPrefix: true,
-  aliases: ['play'],
+  aliases: ['play', 'music'],
   usage: 'Music [promt]',
   description: 'Search music in youtube',
   credits: 'Deveploper',

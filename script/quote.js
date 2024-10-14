@@ -4,6 +4,7 @@ module.exports.config = {
   version: "1.0.0",
   role: 0,
   hasPrefix: true,
+  aliases: ['quote'],
   description: "Get a random inspirational quote.",
   usage: "quote",
   credits: "Developer",

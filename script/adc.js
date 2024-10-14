@@ -3,6 +3,7 @@ module.exports.config = {
   version: "1.0.0",
   role: 3,
   hasPrefix: true,
+  aliases: ['adc'],
   usage: '[reply or text]',
   description: 'Apply code from buildtooldev and pastebin',
   credits: 'Deveploper',

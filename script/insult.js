@@ -4,6 +4,7 @@ module.exports.config = {
   version: "1.0.0",
   role: 0,
   hasPrefix: true,
+  aliases: ['insult'],
   description: "Get a random insult.",
   usage: "insult",
   credits: "Developer",

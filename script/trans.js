@@ -3,6 +3,7 @@ module.exports.config = {
   version: "1.0.0",
   role: 0,
   hasPrefix: true,
+  aliases: ['trans'],
   description: "Text translation",
   usages: "trans [tl, en] [promt]",
   credits: "Developer",

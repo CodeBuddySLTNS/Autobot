@@ -6,6 +6,7 @@ module.exports.config = {
   version: "1.0.0",
   role: 0,
   hasPrefix: true,
+  aliases: ['tid'],
   description: "Get thread ID and group image",
   usages: "tid",
   credits: "Developer",

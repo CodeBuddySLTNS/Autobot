@@ -3,6 +3,7 @@ module.exports.config = {
   version: "1.0.0",
   role: 2,
   hasPrefix: true,
+  aliases: ['leave'],
   credits: "Developer",
   description: "Bot leaves the thread",
   usages: "out",
