@@ -17,9 +17,8 @@ async function getAnswers(q, id){
 async function fetchFromAi(q, url, id){
   try {
     const {data} = await axios.get(`${url}/api/gpt4o?prompt=${q}&id=${id}`);
-    const ans = data.reply || data.result.reply;
     
-    if (ans) return ans;
+    if (data) return data.reply;
     
     throw new Error("No valid response from any AI service");
   } catch (e) {
@@ -33,7 +32,7 @@ module.exports.config = {
   version: '1.0.0',
   hasPermission: 0,
   usePrefix: false,
-  aliases: ['gpt', 'openai'],
+  aliases: ['gpt', 'ai'],
   description: "An AI command powered by GPT-4",
   usages: "ai [prompt]",
   credits: 'Developer',
@@ -66,9 +65,9 @@ module.exports.run = async function({ api, event, args }) {
   api.setMessageReaction("🔍", event.messageID, () => {}, true);
 
   try {
-    const url = (event.type === "message_reply" && event.messageReply.attachments[0]?.type === "photo")
-      ? { link: event.messageReply.attachments[0].url }
-      : {};
+    // const url = (event.type === "message_reply" && event.messageReply.attachments[0]?.type === "photo")
+    //   ? { link: event.messageReply.attachments[0].url }
+    //   : {};
 
     // const { data } = await axios.post('https://gaypt4ai.onrender.com/chat', {
     //   prompt: input,
