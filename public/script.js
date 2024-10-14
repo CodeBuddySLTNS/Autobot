@@ -1,59 +1,85 @@
+const bgTerms = document.querySelector('.bgTerms');
+const navbar = document.querySelector('.navbar');
+const menuBtn = document.querySelector('.menuBtn');
+
+// menu
+menuBtn.onclick = () => {
+  if(navbar.offsetHeight == 0){
+    navbar.style.height = "auto";
+    navbar.style.padding = "15px";
+  }else{
+    navbar.style.height = "0";
+    navbar.style.padding = "0px 15px";
+  }
+}
+
+//online
+  const online = document.querySelector('.online');
+async function onl(){
+try{
+  const response = await fetch("/info");
+  const data = await response.json();
+  online.innerHTML = Object.keys(data).length;
+  console.log(response.length);
+}catch(err){
+  console.log(err)
+}
+}
+onl();
+
 document.getElementById('agreeCheckbox').addEventListener('change', function() {
   document.getElementById('submitButton').disabled = !this.checked;
+  bgTerms.style.display = "block"
+  bgTerms.scrollTop = 0;
 });
+
+document.querySelector('.okay').onclick = () => {
+    document.querySelector('.bgTerms').style.display = "none"
+
+}
+
 let Commands = [{
   'commands': []
 }, {
   'handleEvent': []
 }];
-function showAds() {
-  var ads = [
-    'https://bit.ly/43yn66n',
-    'https://bit.ly/4adDagg',
-    'https://bit.ly/3VzhG92',
-    'https://bit.ly/3xkQTDg',
-    'https://bit.ly/3TTUAZC'
-  ];
-  var index = Math.floor(Math.random() * ads.length);
-  window.location.href = ads[index];
-}
 
-function measurePing() {
-  var xhr = new XMLHttpRequest();
-  var startTime, endTime;
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {
-      endTime = Date.now();
-      var pingTime = endTime - startTime;
-      document.getElementById("ping").textContent = pingTime + " ms";
-    }
-  };
-  xhr.open("GET", location.href + "?t=" + new Date().getTime());
-  startTime = Date.now();
-  xhr.send();
-}
-setInterval(measurePing, 1000);
+// function measurePing() {
+//   var xhr = new XMLHttpRequest();
+//   var startTime, endTime;
+//   xhr.onreadystatechange = function() {
+//     if (xhr.readyState === 4) {
+//       endTime = Date.now();
+//       var pingTime = endTime - startTime;
+//       document.getElementById("ping").textContent = pingTime + " ms";
+//     }
+//   };
+//   xhr.open("GET", location.href + "?t=" + new Date().getTime());
+//   startTime = Date.now();
+//   xhr.send();
+// }
+// setInterval(measurePing, 1000);
 
-function updateTime() {
-  const now = new Date();
-  const options = {
-    timeZone: 'Asia/Manila',
-    hour12: true,
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric'
-  };
-  const formattedTime = now.toLocaleString('en-US', options);
-  document.getElementById('time').textContent = formattedTime;
-}
-updateTime();
-setInterval(updateTime, 1000);
+// function updateTime() {
+//   const now = new Date();
+//   const options = {
+//     timeZone: 'Asia/Manila',
+//     hour12: true,
+//     hour: 'numeric',
+//     minute: 'numeric',
+//     second: 'numeric'
+//   };
+//   const formattedTime = now.toLocaleString('en-US', options);
+//   document.getElementById('time').textContent = formattedTime;
+// }
+// updateTime();
+// setInterval(updateTime, 1000);
 async function State() {
+  selectAllCommands();
+  selectAllEvents();
   const jsonInput = document.getElementById('json-data');
   const button = document.getElementById('submitButton');
-  if (!Commands[0].commands.length) {
-    return showResult('Please provide at least one valid command for execution.');
-  }
+  
   try {
     button.style.display = 'none';
     const State = JSON.parse(jsonInput.value);
@@ -74,22 +100,18 @@ async function State() {
       if (data.success) {
         jsonInput.value = '';
         showResult(data.message);
-        showAds();
       } else {
         jsonInput.value = '';
         showResult(data.message);
-        showAds();
       }
     } else {
       jsonInput.value = '';
       showResult('Invalid JSON data. Please check your input.');
-      showAds();
     }
   } catch (parseError) {
     jsonInput.value = '';
     console.error('Error parsing JSON:', parseError);
     showResult('Error parsing JSON. Please check your input.');
-    showAds();
   } finally {
     setTimeout(() => {
       button.style.display = 'block';
@@ -99,9 +121,14 @@ async function State() {
 
 function showResult(message) {
   const resultContainer = document.getElementById('result');
-  resultContainer.innerHTML = `<h5>${message}</h5>`;
+  resultContainer.innerHTML = `<h5>${message}</h5>
+  <button class="closeResult">Okay</button>`;
   resultContainer.style.display = 'block';
+document.querySelector('.closeResult').onclick = () => {
+  resultContainer.style.display = 'none';
+ }
 }
+
 async function commandList() {
   try {
     const [listOfCommands, listOfCommandsEvent] = [document.getElementById('listOfCommands'), document.getElementById('listOfCommandsEvent')];

@@ -19,7 +19,7 @@ module.exports.run = async function({ api, event, args }) {
   const input = args.join(' ');
 
   if (!input) {
-    return api.sendMessage(`Please provide a question or statement after 'ai'. For example: 'ai What is the capital of France?'`, event.threadID, event.messageID);
+    return api.sendMessage(`✧⁠     ∩_∩\n✧⁠◝( ⁠ꈍ⁠ᴗ⁠ꈍ)◜⁠✧  \n┏━━∪∪━━━━━━━━━┓ \n✿        𝗖𝗼𝗱𝗲𝗕𝘂𝗱𝗱𝘆      ✿\n┗━━━━━━━━━━━━━┛\n━━━━━━━━━━━━━━━\nHow can I assist you today?\n━━━━━━━━━━━━━━━`, event.threadID, event.messageID);
   }
 
   if (input === "clear") {
@@ -35,9 +35,7 @@ module.exports.run = async function({ api, event, args }) {
 
   let chatInfoMessageID = "";
   
-  api.sendMessage(`🔍 "${input}"`, event.threadID, (error, chatInfo) => {
-    chatInfoMessageID = chatInfo.messageID;
-  },event.messageID);
+  api.setMessageReaction("🔍", event.messageID, () => {}, true);
 
   try {
     const url = (event.type === "message_reply" && event.messageReply.attachments[0]?.type === "photo")
@@ -49,15 +47,13 @@ module.exports.run = async function({ api, event, args }) {
       customId: event.senderID,
       ...url
     });
-
-    api.editMessage(`${data.message}`, chatInfoMessageID, (err) => {
-      if (err) {
-        console.error(err);
-      }
-    });
+    
+    api.setMessageReaction("✅", event.messageID, () => {}, true);
+    const aiq = `✧⁠     ∩_∩\n✧⁠◝( ⁠ꈍ⁠ᴗ⁠ꈍ)◜⁠✧  \n┏━━∪∪━━━━━━━━━┓ \n✿        𝗖𝗼𝗱𝗲𝗕𝘂𝗱𝗱𝘆      ✿\n┗━━━━━━━━━━━━━┛\n━━━━━━━━━━━━━━━\n${data.message}\n━━━━━━━━━━━━━━━`;
+    api.sendMessage(aiq, event.threadID, event.messageID);
 
   } catch (error) {
     console.error(error);
-    return api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
+    api.setMessageReaction('⚠️', event.messageID, () => {}, true);
   }
 };
