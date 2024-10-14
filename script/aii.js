@@ -11,7 +11,7 @@ module.exports.config = {
   description: "An AI command with a simplified response.",
   usage: "Aii [prompt]",
   credits: 'Developer',
-  cooldown: 3,
+  cooldown: 1,
 };
 module.exports.run = async function({
   api,
