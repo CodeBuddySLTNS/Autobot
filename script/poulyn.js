@@ -1,3 +1,4 @@
+/*
 const axios = require('axios');
 const config = require('../config.json');
 
@@ -44,8 +45,6 @@ module.exports.config = {
 };
 
 module.exports.run = async function({ api, event, args }) {
-  const info = await api.getUserInfo(event.senderID);
-  const name = info[event.senderID].name;
   const input = args.join(' ');
 
   if (!input) {
@@ -59,10 +58,84 @@ module.exports.run = async function({ api, event, args }) {
   api.setMessageReaction('🤍', event.messageID, () => {}, true);
 
   try {
+    const info = await api.getUserInfo(event.senderID);
+    const name = info[event.senderID].name;
     const answer = await getAnswers(input, event.senderID, name);
     api.sendMessage(`🎀 | 𝙿𝚘𝚞𝚕𝚢𝚗 | 
 ━━━━━━━━━━━━━━━━\n${answer}`, event.threadID, event.messageID);
     api.setMessageReaction('💚', event.messageID, () => {}, true);
+  } catch (error) {
+    console.error(error);
+    api.setMessageReaction('⚠️', event.messageID, () => {}, true);
+  }
+};
+*/
+
+const axios = require('axios');
+const config = require('../config.json');
+
+async function getAnswers(q, id){
+  try {
+    for(url of config.codebuddyApi){
+      const data = await fetchFromAi(q, url, id);
+      if (data) return data;
+    }
+    
+    throw new Error("No valid response from any AI service");
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+}
+
+async function fetchFromAi(q, url, id){
+  try {
+    const {data} = await axios.get(`${url}/api/poulyn?prompt=${q}&id=${id}`);
+    
+    if (data) return data.reply;
+    
+    throw new Error("No valid response from any AI service");
+  } catch (e) {
+    return null
+  }
+}
+
+
+module.exports.config = {
+  name: 'Poulyn',
+  version: '1.0.0',
+  hasPermission: 0,
+  usePrefix: false,
+  aliases: ['poulyn', 'poul'],
+  description: "It's Poulyn",
+  usages: "poulyn [prompt]",
+  credits: 'Developer',
+  cooldowns: 1,
+  dependencies: {
+    "axios": ""
+  }
+};
+
+module.exports.run = async function({ api, event, args }) {
+  const input = args.join(' ');
+
+  if (!input) {
+    return api.sendMessage(`🎀 | 𝙿𝚘𝚞𝚕𝚢𝚗 | 
+━━━━━━━━━━━━━━━━\nHello! 👋 Kumusta araw mo bhe?`, event.threadID, event.messageID);
+  }
+
+  let chatInfoMessageID = "";
+  
+  api.setMessageReaction('🤍', event.messageID, () => {}, true);
+
+  try {
+    const answer = await getAnswers(input, event.senderID);
+    
+    api.setMessageReaction('💚', event.messageID, () => {}, true);
+    const aiq = `🎀 | 𝙿𝚘𝚞𝚕𝚢𝚗 | 
+━━━━━━━━━━━━━━━━\n${answer}`;
+    api.sendMessage(aiq, event.threadID, event.messageID);
+
   } catch (error) {
     console.error(error);
     api.setMessageReaction('⚠️', event.messageID, () => {}, true);
