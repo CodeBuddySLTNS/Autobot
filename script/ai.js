@@ -80,8 +80,7 @@ module.exports.run = async function({ api, event, args }) {
     const answer = await getAnswers(input, event.senderID);
     
     api.setMessageReaction("✅", event.messageID, () => {}, true);
-    const aiq = `✧⁠     ∩_∩\n✧⁠◝( ⁠ꈍ⁠ᴗ⁠ꈍ)◜⁠✧  \n┏━━∪∪━━━━━━━━━┓ \n✿        𝗖𝗼𝗱𝗲𝗕𝘂𝗱𝗱𝘆      ✿\n┗━━━━━━━━━━━━━┛
-━━━━━━━━━━━━━━━\n${answer}\n━━━━━━━━━━━━━━━`;
+    const aiq = `✧⁠     ∩_∩\n✧⁠◝( ⁠ꈍ⁠ᴗ⁠ꈍ)◜⁠✧  \n┏━━∪∪━━━━━━━━━┓ \n✿        𝗖𝗼𝗱𝗲𝗕𝘂𝗱𝗱𝘆      ✿\n┗━━━━━━━━━━━━━┛━━━━━━━━━━━━━━━\n${answer}\n━━━━━━━━━━━━━━━`;
     api.sendMessage(aiq, event.threadID, event.messageID);
 
   } catch (error) {

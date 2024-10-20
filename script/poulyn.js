@@ -74,10 +74,10 @@ module.exports.run = async function({ api, event, args }) {
 const axios = require('axios');
 const config = require('../config.json');
 
-async function getAnswers(q, id){
+async function getAnswers(q, id, name){
   try {
     for(url of config.codebuddyApi){
-      const data = await fetchFromAi(q, url, id);
+      const data = await fetchFromAi(q, url, id, name);
       if (data) return data;
     }
     
@@ -88,9 +88,9 @@ async function getAnswers(q, id){
   }
 }
 
-async function fetchFromAi(q, url, id){
+async function fetchFromAi(q, url, id, name){
   try {
-    const {data} = await axios.get(`${url}/api/poulyn?prompt=${q}&id=${id}`);
+    const {data} = await axios.get(`${url}/api/poulyn?prompt=${q}&id=${id}&name=${name}`);
     
     if (data) return data.reply;
     
@@ -129,7 +129,9 @@ module.exports.run = async function({ api, event, args }) {
   api.setMessageReaction('🤍', event.messageID, () => {}, true);
 
   try {
-    const answer = await getAnswers(input, event.senderID);
+    const info = await api.getUserInfo(event.senderID);
+    const name = info[event.senderID].name;
+    const answer = await getAnswers(input, event.senderID, name);
     
     api.setMessageReaction('💚', event.messageID, () => {}, true);
     const aiq = `🎀 | 𝙿𝚘𝚞𝚕𝚢𝚗 | 
