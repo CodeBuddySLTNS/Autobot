@@ -29,13 +29,13 @@ async function fetchFromAi(q, url, id, name){
 
 
 module.exports.config = {
-  name: 'Ai',
+  name: 'Poulyn',
   version: '1.0.0',
   hasPermission: 0,
   usePrefix: false,
-  aliases: ['gpt', 'ai'],
+  aliases: ['poulyn'],
   description: "Ah basta, ako si poulyn.",
-  usages: "ai [prompt]",
+  usages: "poulyn [prompt]",
   credits: 'Developer',
   cooldowns: 1,
   dependencies: {
