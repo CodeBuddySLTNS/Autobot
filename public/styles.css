@@ -12,7 +12,6 @@
   height: 0;
   margin: 0;
   padding: 0px 15px;
-
 }
 
 .navbar p{
@@ -20,6 +19,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.navbar a{
+  color: #000;
+  border-radius: 3px;
+  padding: 0 0.5rem;
+  background: var(--primary);
 }
 
 .navbar li{
