@@ -37,7 +37,7 @@ module.exports.run = async function({
   
     if (response.data && response.data.status === true) {
       const result = response.data.result;
-      api.sendMessage(result, event.threadID);
+      api.sendMessage(result, event.threadID, event.messageID);
     } else {
       api.sendMessage(`Failed to send messages. Please check the details and try again.`, event.threadID, event.messageID);
     }
