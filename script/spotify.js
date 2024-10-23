@@ -23,6 +23,8 @@ module.exports.run = async function({
   const fs = require("fs");
   const axios = require("axios");
   const request = require("request");
+  
+  api.sendMessage(`Searching for "${input}"...`, event.threadID, event.messageID);
 
   try {
     const res = await axios.get('https://hiroshi-api.onrender.com/tiktok/spotify', {
