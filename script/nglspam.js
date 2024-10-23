@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: 'NGLspam',
+  name: 'Nglspam',
   version: '1.0.0',
   role: 0,
   aliases: ['nglspam', 'ngl'],
@@ -20,6 +20,7 @@ module.exports.run = async function({
     return api.sendMessage("Invalid format. Usage: nglspam username | message | count", event.threadID, event.messageID);
   }
   
+  const axios = require("axios");
   const [username, message, count] = input;
   const total = parseInt(count, 10);
   

@@ -23,8 +23,7 @@ module.exports.run = async function({
   const fs = require("fs");
   const axios = require("axios");
   const request = require("request");
-  const prompt = args.join(" ");
-  
+
   try {
     const res = await axios.get('https://hiroshi-api.onrender.com/tiktok/spotify', {
       params: { search: input }
@@ -37,21 +36,21 @@ module.exports.run = async function({
     
     const path = __dirname + `/cache/spotify.mp3`;
     const file = fs.createWriteStream(path);
-    const rqs = request(encodeURI(shotiurl));
+    const rqs = request(encodeURI(download));
     rqs.pipe(file);
     file.on(`finish`, () => {
        setTimeout(function() {
         return api.sendMessage({
-        body: `🎶 Now playing: ${trackName}\n\n🔗 Spotify Link: ${track}`,
-        attachment: fs.createReadStream(path)
-      }, threadID);
-        }, 5000);
-          });
+          body: `🎶 Now playing: ${trackName}\n\n🔗 Spotify Link: ${track}`,
+          attachment: fs.createReadStream(path)
+        }, threadID);
+      }, 5000);
+    });
     file.on(`error`, (err) => {
-        api.sendMessage(`Error: ${err}`, threadID, messageID);
+      api.sendMessage(`Error: ${err}`, threadID, messageID);
     });
   } catch (error) {
     console.log(error);
-    api.sendMessage('Error retrieving Spotify track. Please check your ', threadID, messageID);
+    api.sendMessage(`Error retrieving Spotify track. Please try again later.`, threadID, messageID);
   }
 };

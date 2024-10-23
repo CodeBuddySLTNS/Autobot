@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "shoti",
+  name: "Shoti",
   version: "1.0.0",
   hasPermission: 0,
   credits: "libyzxy0",
